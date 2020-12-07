@@ -86,6 +86,10 @@
         - Like before, the port 22 source should be your own IP address
         - The port 27017 source should be the IP address of the app instance within your VPC
 
+- Now that they are created, we can move on. We will return to configure them properly later but first, we need to do some things beforehand.
+
+<br>
+
 ## Route tables
 
 - We now need to create a route table. It will contain a set of rules, called routes, that determine where the network traffic from your subnet or gateway is directed. We will need to create two -- one for each subnet we have
@@ -140,10 +144,31 @@
     - Now select the newly-created NACL from the list
     - Click on `Inbound rules` and configure it as shown:
     ![](images/pubin.jpg)
-    - For port 22 access, you will obviously need to input your own IP address for the source
+        - For port 22 access, you will obviously need to input your own IP address for the source
     - For the `Outbound rules`, do it as shown also:
     ![](images/pubout.jpg)
-    - For rule 130, you will need to input the 
+        - For rule 130, you will need to input the IP address of the app on the public network
+    - Finally, go into `Subnet associations` and click `Edit subnet associations`
+    - Select only the public subnet and click `Edit`
+
+- For the private one:
+    - Similarly, select `Create network ACL`
+    - Give it a logical name
+    - Select your VPC and click `Create`
+    - In the `Inbound rules` you will need:
+    ![](images/privin.jpg)
+        - Put your own IP address within the source for rule 100
+        - Put the IP address of your app within rule 110 also
+    - Within `Outbound rules` you also put:
+    ![](images/privout.jpg)
+        - Put your own IP address within rule 130
+    - Go into `Subnet associations` and click `Edit subnet associations`
+    - Select only the private subnet and click `Edit`
+
+<br>
+
+## Configuring our instances
+- Now that our VPC and subnets are configured correctly, we will need to configure our app and database servers
 
 
 
