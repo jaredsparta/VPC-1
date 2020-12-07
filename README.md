@@ -170,8 +170,19 @@
 ## Configuring our instances
 - Now that our VPC and subnets are configured correctly, we will need to configure our app and database servers
 
+- This is done in almost exactly the same methods as before.
 
+- For the app, remember to:
+    - Install nodejs, pm2, nginx
+    - A DB_HOST environment variable is made and is set to the IP of the database instance
+    - nginx is configured correctly as a reverse proxy and you restart upon changing configuration files
+    - You have installed the necessary dependencies of the app using `npm install`
+    - Ensure you start the app using `pm2 start app.js --update-env`
 
+- For the database, remember to:
+    - Install mongod from the website, not mongodb from Ubuntu
+    - Make the necessary changes to `mongod.conf` within `/etc`
+    - Once you have set up properly, remember to append the route table as stated in the previous section
 
 <br>
 
